@@ -565,8 +565,8 @@ class Registry(ModelBase):
                 result.append(attr)
         return result
 
-    def __repr__(cls) -> str:
-        return registry_repr(cls)
+    # def __repr__(cls) -> str:
+    #    return registry_repr(cls)
 
     def lookup(
         cls,
@@ -2137,7 +2137,7 @@ class Artifact(Record, IsVersioned, TracksRun, TracksUpdates):
         *args,
         **kwargs,
     ):
-        pass
+        super().__init__(*args, **kwargs)
 
     @property
     def path(self) -> Path:
@@ -2585,7 +2585,7 @@ class Collection(Record, IsVersioned, TracksRun, TracksUpdates):
         *args,
         **kwargs,
     ):
-        pass
+        super().__init__(*args, **kwargs)
 
     def append(self, artifact: Artifact, run: Run | None = None) -> Collection:
         """Add an artifact to the collection.
@@ -3145,12 +3145,12 @@ def record_repr(
 #     )
 
 
-Record.__repr__ = record_repr  # type: ignore
-Record.__str__ = record_repr  # type: ignore
+# Record.__repr__ = record_repr  # type: ignore
+# Record.__str__ = record_repr  # type: ignore
 
 
 def deferred_attribute__repr__(self):
     return f"FieldAttr({self.field.model.__name__}.{self.field.name})"
 
 
-FieldAttr.__repr__ = deferred_attribute__repr__  # type: ignore
+# FieldAttr.__repr__ = deferred_attribute__repr__  # type: ignore
